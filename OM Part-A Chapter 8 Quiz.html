@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OM Part-A Chapter 8 Quiz</title>
+<style>
+:root{--bg:#f5f7fa;--fg:#12202f;--mut:#5b6b7b;--card:#fff;--line:#d3dbe4;--ok:#1f9d55;--okb:#dff5e8;--bad:#d64545;--badb:#fde4e4;--acc:#1d4f8f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1722;--fg:#e8eef5;--mut:#93a4b5;--card:#16222f;--line:#2a3a4b;--ok:#4cd68a;--okb:#123826;--bad:#ff7777;--badb:#431c1c;--acc:#7db4ff}}
+*{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 Georgia,"Times New Roman",serif;max-width:680px;margin-inline:auto;padding:16px}
+h1{font-size:1.25rem;margin:0 0 4px}
+.sub{color:var(--mut);font:14px system-ui,sans-serif;margin-bottom:14px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:8px 0 16px}
+.bar i{display:block;height:100%;background:var(--acc);width:0;transition:width .3s}
+.meta{display:flex;justify-content:space-between;font:14px system-ui,sans-serif;color:var(--mut)}
+.q{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.q h2{font-size:1.1rem;margin:0 0 14px}
+.pg{font:13px system-ui,sans-serif;color:var(--acc);margin-bottom:6px}
+button{font:inherit;cursor:pointer}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 14px;border:2px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg)}
+.opt:focus-visible,.nx:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.opt.ok{border-color:var(--ok);background:var(--okb)}
+.opt.bad{border-color:var(--bad);background:var(--badb)}
+.nx{margin-top:12px;padding:11px 20px;border:0;border-radius:8px;background:var(--acc);color:#fff;font-family:system-ui,sans-serif}
+.res{font:15px system-ui,sans-serif;margin-top:10px}
+.w{border-top:1px solid var(--line);padding:10px 0;font-size:.95rem}
+.w b{color:var(--ok)}
+.ctx{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:0 0 12px;font:14px/1.45 system-ui,sans-serif}.ctx table{border-collapse:collapse;margin-top:8px;width:100%}.ctx td,.ctx th{border:1px solid var(--line);padding:4px 6px;text-align:left;font-size:13px}#chap{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.cb{padding:6px 10px;border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--fg);font:13px system-ui,sans-serif}.cb.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+</style>
+</head>
+<body>
+<h1>OM Part-A Chapter 8 — Şıklı Quiz</h1>
+<div class="sub">Doğru şık yeşil, yanlış şık kırmızı yanar.</div>
+<div id="chap"></div><div id="app"></div>
+<script>
+const Q=[
+[100,"Düşük sıcaklık irtifa düzeltmesi hangi OAT’de uygulanır?",["+10 °C ve altı","+5 °C ve altı","0 °C veya altı","−10 °C veya altı"],2],
+[99,"Kalkıştan sonra dönüş en erken hangi yükseklikte yapılır?",["400 ft MSL","400 ft AGL","200 ft AGL","1000 ft AGL"],1],
+[105,"Meteorolojik değerlendirme penceresi nedir?",["ETA ±30 dk","ETA ±1 saat","ETA ±2 saat","Sadece ETA +1 saat"],1],
+[108,"ETOPS’suz take-off alternate mesafesi (OEI hızında)?",["2 saat","30 dk","1 saat","3 saat"],2],
+[111,"Alternatifsiz uçuşta (izole hariç) maksimum uçuş süresi?",["4 saat","5 saat","6 saat","8 saat"],2],
+[112,"Alternate+FRF, destination üzerinde kaç saatlik seyir yakıtını aşarsa izole sayılır?",["1 saat","2 saat","3 saat","90 dk"],1],
+[113,"Tablo 3’te Type B için planning minima?",["DA/H+200 ft; RVR/VIS+550 m","+100 ft; +300 m","+400 ft; +1500 m","+150 ft; +450 m"],0],
+[114,"Tablo 4’te tek kullanılabilir Type B için planning minima?",["+100 ft; +300 m","+200 ft; +800 m","DA/H+150 ft; RVR+450 m","+400 ft; +1500 m"],2],
+[118,"Narrow runway için özel sertifikasyon hangi genişlikte gerekir?",["45 m ve üzeri","30 m ve üzeri, 40 m’ye kadar","15 m","60 m"],1],
+[119,"Short runway eşiği (TORA ve LDA)?",["5.000 ft","7.500 ft","6.500 ft (1.982 m)","3.000 ft"],2],
+[122,"EASA’ya göre hangisi steep SAYILMAZ?",["4,0°","5,0°","6,0°","7,0°"],0],
+[126,"P5/P6 co-pilotun PF olamayacağı yan rüzgâr (gust dahil)?",["10 kt üzeri","15 kt üzeri","20 kt üzeri","25 kt üzeri"],1],
+[126,"P3/P4 co-pilot için yan rüzgâr limiti?",["15 kt","25 kt","30 kt","20 kt"],3],
+[128,"Go-around eşiği (900 m veya LDA’nın 1/3’ü) nasıl alınır?",["Büyük olan","Ortalaması","Küçük olan","Hep 900 m"],2],
+[131,"Kategori D için VAT aralığı?",["121–140 kt","141–165 kt","166–200 kt","91–120 kt"],1],
+[131,"A321 hangi kategoridedir?",["C","D","C/D","B"],2],
+[132,"Commander son 12 ayda o havalimanına uçmadıysa ne eklenir?",["+100 ft / +50 m","+200 ft","MDA/MDH +50 ft ve görüş +100 m","+50 m"],2],
+[134,"LVTO onayı olmadan 400 m (gece) kalkış için gereken?",["Sadece centerline","Pist sonu ışıkları + edge veya centerline ışıkları","Sadece markings","Şart yok"],1],
+[136,"İniş görüş minimumu 800 m’nin altındaysa yaklaşma ne zaman yetkilidir?",["Her zaman","Sadece gündüz","RVR raporlanıyorsa","Asla"],2],
+[137,"Visual approach için minimum RVR?",["550 m","1500 m","800 m","1000 m"],2],
+[142,"F/D, HUDLS veya autoland yoksa centerline lights arızasında?",["Etkisiz","RVR 750 m","RVR 400 m","Yasak"],1],
+[143,"VIS/RVR minimumun altındaysa yaklaşma hangi noktayı geçerek sürdürülemez?",["500 ft","2000 ft","Havalimanı kotundan 1000 ft yukarısı","FAF"],2],
+[144,"Yaklaşmaya devam için kontrol eden RVR hangisidir?",["Stop-end","Midpoint","Touchdown","Ortalama"],2],
+[145,"Visual glide path indicator 2D yaklaşmada ne zaman zorunludur?",["Gündüz","Her zaman","Gece","Hiçbir zaman"],2],
+[147,"ETOPS ERA için TAF penceresi?",["ETA ±1 saat","En erken ETA’dan ETA+1 saate","ETA +2 saat","Sadece ETA"],1],
+[154,"Contingency yakıt (C)(1)(a): trip yakıtının yüzde kaçı?",["%5","%10","%3","%1"],2],
+[154,"Contingency (C)(2) seçeneği?",["10 dk holding","1.500 ft’te 5 dk holding","30 dk holding","15 dk holding"],1],
+[158,"Fuel ERA dairesinin yarıçapı toplam mesafenin yüzde kaçıdır?",["%25","%10","%20","%30"],2],
+[163,"Top-up’ta geniş gövdede blok yakıttan kaç ton az yüklenir?",["2 ton","5 ton","3 ton","1 ton"],1],
+[164,"Jet A1 standart yoğunluğu?",["0,76","0,85","1,0","0,80"],3],
+[164,"Uçuş/teknik ve kabin ekibi standart kütleleri?",["80/70 kg","90/80 kg","75/85 kg","85/75 kg"],3],
+[169,"Yakıt ve ATA kaydı hangi aralıkla yapılır?",["15 dk","30 dk","120 dk","60 dk"],3],
+[173,"Wide-cut yakıt hangisidir?",["Jet-B","Jet A-1","JP-5","TS-1"],0],
+[175,"Karışımda en yüksek donma noktalı yakıt hangi oranın üzerinde limitleyici olur?",["%5","%20","%50","%10"],3],
+[182,"Wide-cut ikmalinde dolum hızı?",["%25 azaltılır","%75 azaltılır","Normal","%50 azaltılır"],3],
+[189,"Line Information Form numarası?",["FR.73.0001","LS.95.012","FR.71.0216","PR.10.60.004"],2],
+[196,"Infant tanımı?",["12 yaş altı","7 yaş altı","2 yaşından küçük","5 yaş altı"],2],
+[197,"Unaccompanied Minor?",["2–7 yaş refakatçisiz","12+ yaş","Infant","7–12 yaş refakatçisiz"],3],
+[200,"Slide’lar ne zaman arm edilir?",["İniş sonrası","Taxi","Hiç","Push-back başlamadan önce"],3],
+[205,"Perishable cargo dış paketleri yaklaşık kaç saat dayanıklıdır?",["6 saat","12 saat","72 saat","24 saat"],2],
+[213,"Visual approach glide path açısı?",["1°","2,5–3°","5°","6°"],1],
+[216,"CDFA dışı bir teknik onaylanırsa RVR ne kadar artırılır?",["+100 m","+200 m","+800 m","+400 m"],3],
+[217,"SLOP’ta izinli pozisyonlar?",["Merkez hat, 1 NM sağ, 2 NM sağ","Sol 1 NM","5 NM","Hepsi"],0],
+[218,"Standart altimetre ayarı?",["1000 hPa","1030 hPa","1013,2 hPa","29.00 inHg"],2],
+[221,"Radyo altimetre callout’u kaç ft AGL’de yapılır?",["1.000 ft","500 ft","2.500 ft","100 ft"],2],
+[222,"Atanmış seviyeye son 1000 ft’te tırmanış/alçalma oranı?",["2000 ft/dk","500 ft/dk","3000 ft/dk","1000 ft/dk’yı aşmamalı"],3],
+[223,"2000 ft kala V/S?",["2500 fpm","3000 fpm","500 fpm","1500 fpm’yi aşmamalı"],3],
+[225,"RA nedeniyle clearance’tan sapma bildirimi?",["UNABLE","CLEAR","TURKISH 123 TCAS RA","MAYDAY"],2],
+[228,"En yakın güvenli iniş yerinde beklenen yakıt FRF’den azsa?",["MINIMUM FUEL","MAYDAY, MAYDAY, MAYDAY, FUEL","PAN PAN","Hiçbiri"],1],
+[237,"Controlled rest en fazla kaç dakika?",["20","30","45","60"],2],
+[238,"Sterile cockpit seyir dışında hangi irtifanın altında geçerlidir?",["5.000 ft AAL","10.000 ft AAL","15.000 ft","FL180"],1],
+[242,"Incapacitation sonrası inişte koltuklar?",["Değiştirilir","Değiştirilmez","Hep değişir","Autoland’de değişir"],1],
+[244,"LVO’da PED’ler?",["Flight mode’da açık","Kapalı, elektrikten ayrılmış ve stow","Serbest","Sadece pilota yardımcı olanlar açık"],1],
+[256,"Kabin irtifası 14.000–15.000 ft arasında first aid oxygen en az yolcuların?",["%10","%30","%50","Tümü"],1],
+[257,"PBE maskesi en az kaç dakika oksijen sağlar?",["5","10","15","30"],2],
+[226,"Uçuşta yakıt kontrolü hangi aralıkla yapılır?",["30 dk’yı aşmayan","60 dk’yı aşmayan","90 dk’yı aşmayan","120 dk’yı aşmayan"],1],
+[227,"Varışta beklenen kullanılabilir yakıt en az ne olmalıdır?",["Sadece contingency","Gerekli alternate + FRF (alternate gerekmiyorsa FRF)","Sadece trip","Extra yakıt"],1],
+[228,"MINIMUM FUEL hangi durumda ilan edilir?",["Bir havalimanına committed olup clearance değişikliği FRF’den az yakıtla inişe yol açabilirse","Her gecikmede","Yakıt fazlayken","Taxi sırasında"],0],
+[229,"MINIMUM FUEL beyanı için hangisi doğrudur?",["MAYDAY ile eşdeğerdir","Acil durum değildir; öncelik beklenmez","PAN PAN ile eşdeğerdir","Sadece ETOPS’ta kullanılır"],1],
+[230,"Commit kararından sonra IOCC nasıl bilgilendirilir?",["Sadece ATC üzerinden","ACARS/SATCOM/telsiz ile en kısa sürede","Bildirilmez","Handling üzerinden"],1],
+[232,"Örnek 2’de (25 dk delay) FRF kaç dakikadır?",["15 dk","20 dk","30 dk","45 dk"],2],
+[233,"Örnek 3’te alternate’siz yeniden planlama hangi şartlarla mümkündür?",["Tek pist, kötü hava","İki pist, iyi hava, 4 saatten kısa uçuş","Sadece gece","İzole havalimanı"],1],
+[234,"Cockpit’te tek pilot kalırsa kabin ekibi ne yapar?",["Kapıda bekler","Cockpit giriş alanında bir kabin ekibi üyesi bekler","Hiçbir şey","Cockpit’e girer"],1],
+[236,"Headset (boom mic) hangi seviyenin altında kullanılır?",["FL200","FL300","Sadece taxi","Hiç"],0],
+[237,"Controlled rest sonrası recovery süresi?",["5 dk","10 dk","20 dk","45 dk"],2],
+[237,"Controlled rest top of descent’ten en az ne kadar önce biter?",["10 dk","30 dk","45 dk","60 dk"],1],
+[239,"Uçuş ekibi shoulder harness’ı tırmanışta en erken hangi irtifada çıkarabilir?",["5.000 ft AAL","10.000 ft AAL","3.000 ft AAL","FL180"],1],
+[239,"Kabin ekibi kalkıştan sonra en erken hangi irtifada serbest kalır?",["1.000 ft AAL","3.000 ft AAL","5.000 ft AAL","10.000 ft AAL"],2],
+[240,"Hangisi cockpit’e giriş yetkisi olanlar arasında YOKTUR?",["DGCA müfettişi","Görevli kabin ekibi","Yolcu","Eğitim-kontrol pilotu"],2],
+[242,"Incapacitated pilotu cockpit’ten çıkarmak için en az kaç kişi gerekir?",["1","2","3","Hiç"],1],
+[244,"Pilota yardımcı PED’ler için hangisi doğrudur?",["Serbest","Flight Mode, elektrikten ayrılmış, stow; 20.000 ft altında kullanılmaz","Yasak","Sadece taxi’de açık"],1],
+[245,"Sigara (e-sigara dahil) için hangisi doğrudur?",["Commander izin verebilir","Yasak; Commander izin veremez","Gündüz serbest","Rampada serbest"],1],
+[246,"Kabin anonslarında dil sırası?",["Önce İngilizce, sonra Türkçe","Önce Türkçe, sonra İngilizce","Sadece Türkçe","Sadece İngilizce"],1],
+[246,"Alçalma anonsu en geç ne zamana kadar tamamlanır?",["Final","Top of descent","Taxi","10.000 ft"],1],
+[248,"CAT II inişlerde otomasyon politikası?",["Manuel zorunlu","Manuel yapılabilir; auto-land tavsiye edilir","Yasak","Sadece manuel"],1],
+[249,"Yolcu için ölüm teyidi konusunda?",["Hemşire teyit eder","Doktor teyit etmedikçe kişi yaşıyor kabul edilir","Cabin Chief karar verir","Commander karar verir"],1],
+[251,"Emergency Medical Kit (Dr. Kit) açılmadan önce?",["Cabin Chief serbestçe açar","Commander onayı alınır; ilaçları nitelikli kişi verir","Yolcu açar","Hiç"],1],
+[252,"Emergency Talk tetikleyici kelime?",["MAYDAY","UNCOMFORTABLE","CAPTAIN","STOP"],1],
+[252,"Emergency Talk’un son savunma hattı cümlesi?",["Captain, you must listen","Land now","Divert","Stop"],0],
+[254,"25.000 ft üzerinde yolcuların belirli yüzdesi için ne gerekir?",["First aid oxygen","Hiçbir şey","Sadece PBE","Sadece mürettebat oksijeni"],0],
+[255,"Kabin irtifası 10.000 ft’i kaç dakikadan uzun aşarsa kritik görevdeki ekip sürekli oksijen kullanır?",["10 dk","15 dk","30 dk","60 dk"],2],
+[255,"Hangi kabin irtifasında süre beklenmeden sürekli oksijen gerekir?",["13.000 ft","11.000 ft","12.000 ft","15.000 ft"],0],
+[256,"Kabin irtifası 15.000 ft üzerindeyse first aid oxygen kime sağlanır?",["Yolcuların %10’u","Yolcuların %30’u","Tüm yolculara","Hiç"],2],
+[256,"10.000–14.000 ft arasında 30 dk’dan uzun süre için first aid oxygen en az?",["Yolcuların %10’u","Yolcuların %30’u","Tüm yolculara","Yolcuların %50’si"],0],
+[257,"PBE için hangisi doğrudur?",["Sadece pilotlar içindir","Cockpit’te her gerekli üyeye; duman ortamında görev ve aktif yangın söndürmeyi sağlar","Sadece kabinde bulunur","Gerekli değildir"],1]
+];
+Q.push(
+[174,"Jet A-1 bazı pazarlarda neden kısıtlı olabilir?",["Sıcaklık nedeniyle","Küresel havacılık yakıtı tedarik zinciri gelişmeleri","Pist uzunluğu","Vergi"],1],
+[173,"Jet A-1 için min parlama / maks donma noktası?",["38 °C / −47 °C","28 °C / −50 °C","60 °C / −46 °C","38 °C / −40 °C"],0],
+[175,"%10’dan az Jet A + %90’dan fazla Jet A-1 karışımı hangi yakıt sayılır?",["Jet A","JP-8","Jet A-1 (≈ −47 °C)","Belirsiz"],2],
+[176,"Jet A ile Jet A-1 karışırsa yakıt nasıl adlandırılır?",["Jet A-1","JP-8","Jet A","TS-1"],2],
+[177,"İkmalde hortum bağlanmadan önce ne yapılır?",["APU çalıştırılır","Bonding (araç ve uçak bağlanır)","HF test edilir","Radar test edilir"],1],
+[177,"İkmal sırasında hava radarı ve HF için kural?",["ON ve test edilir","Radar OFF; HF ile yayın/test yok","İkisi de ON","Sadece HF kapalı"],1],
+[179,"Yolcu bindirmesi kimin onayıyla başlar?",["Handling","ATC","Commander","Dispatch"],2],
+[180,"Her kalkış öncesi hangi checklist uygulanır?",["FR.71.0216","LS.73.020","FR.73.0001 Aircraft Security Search Checklist","PR.60.005"],2],
+[181,"Bir motor çalışırken ikmal ne zaman yapılır?",["GPU varsa","Her zaman","Gece","GPU yok ve APU servis dışıysa"],3],
+[182,"Wide-cut yakıt onayı kimden alınır?",["Commander","ATC","DGCA","Senior Vice President, Flight Operations"],3],
+[182,"Wide-cut ikmalinden sonra kaç ikmal wide-cut sayılır?",["1","Sonraki 2","3","Hiç"],1],
+[184,"Yolcu varken ikmalde sinyal/ışık konumları?",["Seat belt ON, No Smoking OFF","Fasten Seat Belt OFF, No Smoking ON, emergency lighting ARM","Hepsi OFF","Hepsi ON"],1],
+[187,"Bir motor çalışırken merdivenle inişte hangi kapılar kullanılır?",["Çalışan motor tarafı","Tüm kapılar","Kargo kapısı","Çalışan motorun karşı tarafındaki kapılar"],3],
+[188,"Transit durakta güvenlik aramasını kim yapar?",["Handling","Commander","Kabin ekibi","Polis"],2],
+[190,"Uçmak istemeyen yolcu reddetmeye devam ederse?",["Bagajı kalır","Eşyalarıyla iner, checked baggage indirilir","Divert edilir","Hiçbir işlem"],1],
+[192,"Manifesto hiç sağlanamazsa hangisi kabul edilir?",["Sözlü bilgi","E-posta","İstasyon temsilcisinin imzalı yazılı beyanı","Hiçbiri"],2],
+[193,"Rapid deplaning ne zaman gerekir?",["Havada acil durumda","Acil tahliye dışı ciddi tehlike var ama kontrollü inmeye zaman varsa","Her gecikmede","Taxi sırasında"],1],
+[195,"Kendine bakamayan yolcu için ne gerekir?",["Pilot refakati","Nitelikli yetişkin refakatçi","Hiçbir şey","Ek bilet"],1],
+[198,"Direnen INAD yolcu için ne yapılır?",["Bindirilir","Kelepçelenir","Bindirilmesi reddedilir","Hiç"],2],
+[199,"Anti-collision beacon ON ne demektir?",["Yaklaşmak güvenli","Yer personeli uçaktan uzak durmalı","Bakım yapılıyor","Kapı açılabilir"],1],
+[201,"Motor ateşlemeden önce yer ekipmanı?",["Hepsi yerinde kalır","GPU hariç uzaklaştırılmış olmalı","Önemli değil","Sadece merdiven kalır"],1],
+[204,"Canlı hayvan (AVI) kabulünün nihai kararı kimdedir?",["Commander","Pilot","İstasyon müdürleri","Kabin şefi"],2],
+[206,"HUM ne demektir?",["Hazardous","Humidity","Human Remains","Hull"],2],
+[208,"LHO uçakta nerede taşınır?",["Kargoda","Cockpit’te","Kabinde, ekip gözetiminde, ana kapıya yakın","Galley’de"],2],
+[209,"AOG parçaları nerede taşınır?",["Kabinde","Cockpit’te","Yalnızca kargo bölmelerinde","Galley’de"],2],
+[210,"Commander hangi kişilerin binmesini reddedebilir?",["Yaşlı yolcuları","Çocukları","Sarhoş veya alkol/uyuşturucu etkisindekileri","Hamileleri"],2]
+);
+const app=document.getElementById("app");let list,i,score,wrong,done,cur=Q;
+const CTX={
+113:{n:"Tablo 3’ü göster",r:[["Yaklaşma türü","Ceiling","RVR/VIS"],["Type B","DA/H + 200 ft","+ 550 m"],["3D Type A (sistem min. ≤ 200 ft)","DA/H + 200 ft","+ 800 m"],["2+ Type A (ayrı navaid)","DA/H veya MDA/H + 200 ft","+ 1000 m"],["Diğer Type A","+ 400 ft","+ 1500 m"],["Circling","MDA/H + 400 ft","VIS + 1500 m"]]},
+114:{n:"Tablo 4’ü göster",r:[["Yaklaşma türü","Ceiling","RVR/VIS"],["2+ Type B, iki ayrı pist","DA/H + 100 ft","RVR + 300 m"],["1 Type B","DA/H + 150 ft","RVR + 450 m"],["3D Type A (≤ 200 ft)","DA/H + 200 ft","+ 800 m"],["2+ Type A","+ 200 ft","+ 1000 m"],["1 Type A","+ 400 ft","+ 1500 m"],["Circling","MDA/H + 400 ft","VIS + 1500 m"]]},
+131:{n:"Kategori tablosunu göster",r:[["Kategori","VAT"],["C","121–140 kt"],["D","141–165 kt"],["C: B737-700, 737-800 SFP, A319, A320, A330, A340","D: 737-8/-9 MAX, 737-900ER, B777, B787 (A321: C/D)"]]},
+134:{n:"Kalkış minima tablosunu göster",r:[["RVR/VIS","Tesis"],["500 m (gündüz)","NIL"],["400 m (gündüz)","Centerline markings veya edge lights veya centreline lights"],["400 m (gece)","Pist sonu ışıkları + edge veya centerline ışıkları"]]},
+142:{n:"Arıza tablosunu göster",r:[["Arızalı ekipman","Etki"],["Approach lights: hiç yok / son 210 m hariç / son 420 m hariç","NALS / BALS / IALS"],["Edge, threshold, end lights","Gündüz etki yok; gece izin yok"],["Centerline lights","F/D, HUDLS veya autoland ile etki yok; aksi halde RVR 750 m"]]},
+232:{s:"Örnek 2 (senaryo): Destinasyonda ATC 25 dakikalık gecikme bildirdi. Kalan yakıt: 7 dk contingency + 25 dk destination alternate + 30 dk FRF. Holding’den alternate’e diversion artık mümkün olmayan noktaya gelindi."},
+233:{s:"Örnek 3 (senaryo): 5 saatlik uçuş, FL350’ten FL230’a inildi. Destinasyonda iki pist ve iyi hava var; kalan uçuş 4 saatten kısa olduğu için alternate’siz yeniden planlandı. Pist değişikliği trip yakıtına +12 dk ekledi; alternate yakıtı 25 dakikalık uçuşa yeter."}
+};
+function sec(p){return p<172?"8.1":p<211?"8.2":p<253?"8.3":"8.8"}
+function ctxr(card,p){const c=CTX[p];if(!c)return;if(c.s)card.append(el("div","ctx",c.s));if(c.r){const d=el("details","ctx");d.append(el("summary","",c.n));const t=el("table");c.r.forEach((r,k)=>{const tr=el("tr");r.forEach(x=>tr.append(el(k?"td":"th","",x)));t.append(tr)});d.append(t);card.append(d)}}
+function pick(s){cur=s==="Tümü"?Q:Q.filter(q=>sec(q[0])===s);const ch=document.getElementById("chap");ch.textContent="";["Tümü","8.1","8.2","8.3","8.8"].forEach(x=>{const n=x==="Tümü"?Q.length:Q.filter(q=>sec(q[0])===x).length;const b=el("button","cb"+(x===s?" on":""),(x==="Tümü"?"Tümü":"Chapter "+x)+" ("+n+")");b.onclick=()=>pick(x);ch.append(b)});start(cur)}
+function shuf(a){a=a.slice();for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a}
+function start(arr){list=shuf(arr);i=0;score=0;wrong=[];render()}
+function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e}
+function render(){
+app.textContent="";
+if(i>=list.length){return end()}
+const q=list[i];done=false;
+const m=el("div","meta");m.append(el("span","",`Soru ${i+1} / ${list.length}`),el("span","",`Doğru: ${score}`));
+const bar=el("div","bar");const b=el("i");b.style.width=(i/list.length*100)+"%";bar.append(b);
+const card=el("div","q");card.append(el("div","pg",`Sayfa ${q[0]}`),el("h2","",q[1]));ctxr(card,q[0]);
+const res=el("div","res");const nx=el("button","nx",i+1<list.length?"Sonraki soru":"Sonucu gör");nx.hidden=true;
+nx.onclick=()=>{i++;render()};
+q[2].forEach((t,k)=>{
+const o=el("button","opt",String.fromCharCode(65+k)+") "+t);
+o.onclick=()=>{
+if(done)return;done=true;
+const all=card.querySelectorAll(".opt");
+all[q[3]].classList.add("ok");
+if(k===q[3]){score++;res.textContent="Doğru."}
+else{o.classList.add("bad");wrong.push(q);res.textContent="Yanlış. Doğru cevap: "+String.fromCharCode(65+q[3])+") "+q[2][q[3]]}
+nx.hidden=false;nx.focus();
+};
+card.append(o)});
+card.append(res,nx);app.append(m,bar,card);
+}
+function end(){
+const c=el("div","q");
+c.append(el("h2","",`Sonuç: ${score} / ${list.length}`));
+if(wrong.length){
+c.append(el("div","res","Yanlış yaptıkların:"));
+wrong.forEach(q=>{const w=el("div","w");w.append(document.createTextNode(`(S${q[0]}) ${q[1]} → `));w.append(el("b","",q[2][q[3]]));c.append(w)});
+const r=el("button","nx","Yanlışları tekrar çöz");r.onclick=()=>start(wrong);c.append(r);
+}else c.append(el("div","res","Hepsi doğru."));
+const a=el("button","nx","Baştan başla");a.style.marginLeft="8px";a.onclick=()=>start(cur);c.append(a);
+app.append(c);
+}
+pick("Tümü");
+</script>
+</body>
+</html>
